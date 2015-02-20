@@ -11,7 +11,7 @@ module.exports = function (grunt) {
     grunt.initConfig({
         watch: {
             scripts: {
-                files: ['Gruntfile.js', 'lib/**/*.js', 'test/**/*.js', 'index.js', '.jscsrc', '.jshintrc'],
+                files: ['Gruntfile.js', 'routes/**/*.js', 'models', 'test/**/*.js', '*.js', '.jscsrc', '.jshintrc'],
                 tasks: ['default'],
                 options: {
                     spawn: true
@@ -23,7 +23,7 @@ module.exports = function (grunt) {
                 options: {
                     jshintrc: '.jshintrc'
                 },
-                src: ['Gruntfile.js', 'lib/**/*.js', 'test/**/*.js', '*.js']
+                src: ['Gruntfile.js', 'routes/**/*.js', 'models/**/*.js', 'test/**/*.js', '*.js']
             }
         },
         jscs: {
@@ -32,7 +32,7 @@ module.exports = function (grunt) {
                     config: ".jscsrc"
                 },
                 files: {
-                    src: ['Gruntfile.js', 'lib', 'test', '*.js']
+                    src: ['Gruntfile.js', 'routes', 'models', 'test', '*.js']
                 }
             }
         },

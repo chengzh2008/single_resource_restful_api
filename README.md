@@ -1,21 +1,18 @@
 # Single Resource RESTful API
 
+## Technologies used in this RESTful API:
+	NodeJs, Express, MongoDB, Mongoose, Grunt, Chai, Chai-http, and some third-party libraries
 
-Hello there! This is my **my express framework**, made from the pure vanilla node.
+This is the RESTFUL API server backed by MongoDB.
 
 ## Usage
 
 **Installation**:
-`npm install -g simple_express_framework`
+`npm install single_resource_restful_api`
 
-**Then in your code**: Just as simple as three lines of code, a RESTFUL web server is good to go.
+**Then in your code**: Just require the server installed. Then your server is up and running.
 
-	var myExpress = require('simple_express_framework');
-	myExpress.addResources('unicorns');
-	myExpress.addResources('footballs'); // you can add whatever resource you need
-	myExpress.startServer(4000); // take port number that you want
-	
-	// json data is stored at server root directory /data/<your resource>/id.json
+	require('./single_resource_restful_api')
 	
 
 ## Test the server
@@ -25,46 +22,41 @@ You can use superagent-cli or any other http request utility to test the server.
 
 ## Http request/response format 
 
-It supports http request `<get|post|put|patch|delete>`. 
+It supports http request `<get|post|put|delete>`.
 
-For put, post and patch, the Json data is sent along with the request, saved or modified json data sent back as a data property in a json object as response body if success. Other wise, error message will be included in the return response.body and data property is set to `null`. 
+For put, post, the Json data is sent along with the request, saved or modified json data sent back.
 
 	//json data in the request:
 	{ 	key1: value1,
 		key2: value2,
 		key3: value3
 	}
-	
-	// json data in the response:
-	{	msg: "Successful|Invalid request|Internal server error"
-		data: 	// or modified data with patch request
-			{	key1: value1,  
-				key2: value2,
-				key3: value3
-			}
-	}
-							
-For get and delete, no data is sent along the request, the response data contains indicating the request/response status and json data for get request and null for delete request.
 
-	//no json data in the request:
-	
+							
+For get request, an array of json objects will be sent back
+
+	//response data in the res.body:
+    	[{ 	key1: value1,
+    		key2: value2,
+    		key3: value3
+    	},
+    	...
+    	]
+
+For delete request, no data is sent along the request, the response data is a json object showing a message like this:
+
 	// json data in the response:
-	{	msg: "Successful|Invalid request|Internal server error"
-		data: 	// for "get" request and "null" for delete request
-			{	key1: value1,  
-				key2: value2,
-				key3: value3
-			}
-	}
+	{msg: 'Your doc has been removed: ID ' + req.params.id}
 
 
 ## Internal components (for reference only)
+
 There are four modules in my express framework: 
 	
 	index.js			// The package main js file
-	httpServer.js 	// Server related configuration and creation
-	Router.js			// Handle resources based on the request method
-	dataSourcePlain	// Deal with the json data store, currentlly support flat file store, can be easily swapped out to use mongodb database.
+	server.js 			// Server related configuration and creation
+	blogs.js			// Model definition and configuration of MongoDB with mongoose
+	blogs_routes.js		// Routes handling method (RESTFul API web service, supporting GET|POST|PUT|DELETE request)
 
 
 ## Credits
