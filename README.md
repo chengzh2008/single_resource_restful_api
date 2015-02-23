@@ -3,7 +3,8 @@
 ## Technologies used in this RESTful API:
 	NodeJs, Express, MongoDB, Mongoose, Grunt, Chai, Chai-http, and some third-party libraries
 
-This is the RESTFUL API server backed by MongoDB.
+This is the RESTFUL API server backed by MongoDB. It has authenticate steps for each request, which is
+built on top of third librarys: passport, eat, bcrypt-nodejs and passport-http.
 
 ## Usage
 
@@ -20,9 +21,10 @@ You can use superagent-cli or any other http request utility to test the server.
 
 `superagent <url> <rest method(get|post|put|patch|delete)> <json data>`
 
-## Http request/response format 
+## Http request/response format
 
-It supports http request `<get|post|put|delete>`.
+It supports http request `<get|post|put|delete>`. Every request should have a token with it. You can
+get a token by creating a new user or login an existing user.
 
 For put, post, the Json data is sent along with the request, saved or modified json data sent back.
 
@@ -57,7 +59,13 @@ There are four modules in my express framework:
 	server.js 			// Server related configuration and creation
 	blogs.js			// Model definition and configuration of MongoDB with mongoose
 	blogs_routes.js		// Routes handling method (RESTFul API web service, supporting GET|POST|PUT|DELETE request)
-
+	eat_auth.js			// Middleware to decode the token
+	logger.js			// Logger middleware to log every request to database
+	passport_strat.js	// Passport strategy setup
+	request_record.js	// Model definition for http request
+	users.js			// Model definition for user and its help methods for hashing the password,
+								generating token and testing if the password is valid or not
+	users_routes.js		// Routes handing method: create a user and login a user
 
 ## Credits
 Give credits to instructors and members in CodeFellow Fullstack Javascript for those helpful discussion and suggestion.
