@@ -1,10 +1,13 @@
 'use strict';
 
 var bodyparser = require('body-parser'),
-    User = require('../models/users');
+    User = require('../models/users'),
+    logger = require('../lib/logger');
 
 module.exports = function(app, passport, appSecret) {
     app.use(bodyparser.json());
+    // middleware to log the request, should be placed before those request.
+    app.use(logger());
 
     app.post('/create_user', function(req, res) {
         var newUser = new User();

@@ -201,7 +201,7 @@ describe('blogs api end points', function () {
                     done();
                 });
         });
-    })
+    });
 
 
 
