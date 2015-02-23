@@ -1,7 +1,7 @@
 {
   "name": "single_resource_restful_api",
   "version": "0.1.0",
-  "description": "assignment for bitmap reader and transformer",
+  "description": "assignment for single resource restful API",
   "main": "index.js",
   "directories": {
     "test": "test"
