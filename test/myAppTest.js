@@ -1,4 +1,6 @@
 'use strict';
+/*jshint expr: true*/
+
 process.env.MONG_URI = 'mongodb://localhost/myApp_test';
 require('../index');
 
@@ -66,7 +68,7 @@ describe('blogs api end points', function () {
                 expect(res.body.email).to.eql('xyz@abc.com');
 
                 done();
-            })
+            });
     });
 
     describe('already has a data in database', function() {

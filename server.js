@@ -1,10 +1,10 @@
 'use strict';
 
-var express = require('express')
-    , mongoose = require('mongoose')
-    , userRouter = require('./routes/blogs_routes')
-    , app = express()
-    , router = express.Router();
+var express = require('express'),
+    mongoose = require('mongoose'),
+    userRouter = require('./routes/blogs_routes'),
+    app = express(),
+    router = express.Router();
 
 module.exports = {
     startServer: function () {

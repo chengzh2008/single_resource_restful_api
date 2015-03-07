@@ -11,7 +11,7 @@ module.exports = function (grunt) {
     grunt.initConfig({
         watch: {
             scripts: {
-                files: ['Gruntfile.js', 'routes/**/*.js', 'models', 'test/**/*.js', '*.js', '.jscsrc', '.jshintrc'],
+                files: ['Gruntfile.js', 'routes/**/*.js', 'models', 'test/**/*.js', '*.js', '.jshintrc'],
                 tasks: ['default'],
                 options: {
                     spawn: true
@@ -26,16 +26,6 @@ module.exports = function (grunt) {
                 src: ['Gruntfile.js', 'routes/**/*.js', 'models/**/*.js', 'test/**/*.js', '*.js']
             }
         },
-        jscs: {
-            all: {
-                options: {
-                    config: ".jscsrc"
-                },
-                files: {
-                    src: ['Gruntfile.js', 'routes', 'models', 'test', '*.js']
-                }
-            }
-        },
         simplemocha: {
             all: {
                 src: ['test/**/*.js']
@@ -44,6 +34,6 @@ module.exports = function (grunt) {
     });
 
     // register the tasks
-    grunt.registerTask('test', ['jshint', 'jscs', 'simplemocha']);
+    grunt.registerTask('test', ['jshint', 'simplemocha']);
     grunt.registerTask('default', ['test']);
 };
