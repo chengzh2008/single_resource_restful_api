@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function(app) {
-    app.constructor('notesController', ['$scope', '$http', function ($scope, $http) {
+    app.controller('blogsController', ['$scope', '$http', function ($scope, $http) {
         var blogsUrl = '/api/v1/blogs';
         $scope.blogs = [];
 

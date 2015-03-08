@@ -7,32 +7,25 @@ require('../../index');
 var chai = require('chai'),
     chaihttp = require('chai-http'),
     expect = chai.expect,
+    serverUrl = 'localhost:3000/api/v1',
+    mongoose = require('mongoose'),
     Chance = require('chance'),
     chance = new Chance(),
-    serverUrl = 'localhost:3000/api/v1',
-    mongoose = require('mongoose');
+    randomDataGenerator = require('../../lib/randomDataGenerator');
 
 
 chai.use(chaihttp);
 
-function getRandomblogObject() {
-    return {
-        author: chance.string(10),
-        email: chance.string(10) + '@' + chance.string(5) + '.com',
-        body: chance.string(200),
-        date: new Date().toJSON(),
-    };
-}
 
 describe('blogs api end points', function () {
-    var blogA = getRandomblogObject(),
+    var blogA = randomDataGenerator.getRandomBlog(),
         blogDefault = {
             author: chance.string(10),
             body: chance.string(200)
         },
 
-        blogB = getRandomblogObject(),
-        blogC = getRandomblogObject();
+        blogB = randomDataGenerator.getRandomBlog(),
+        blogC = randomDataGenerator.getRandomBlog();
 
 
     afterEach(function (done) {
@@ -54,11 +47,11 @@ describe('blogs api end points', function () {
             });
     });
 
-    it('should have a default email', function(done) {
+    it('should have a default email', function (done) {
         chai.request(serverUrl)
             .post('/blogs')
             .send(blogDefault)
-            .end(function(err, res){
+            .end(function (err, res) {
                 expect(err).to.eql(null);
                 expect(res.body.author).to.eql(blogDefault.author);
                 expect(res.body.email).to.eql('xyz@abc.com');
@@ -67,13 +60,13 @@ describe('blogs api end points', function () {
             });
     });
 
-    describe('already has a data in database', function() {
+    describe('already has a data in database', function () {
         var id;
-        beforeEach(function(done){
+        beforeEach(function (done) {
             chai.request(serverUrl)
                 .post('/blogs')
                 .send(blogB)
-                .end(function(err, res) {
+                .end(function (err, res) {
                     id = res.body._id;
                     done();
                 });
@@ -82,7 +75,7 @@ describe('blogs api end points', function () {
         it('should have an index', function (done) {
             chai.request(serverUrl)
                 .get('/blogs')
-                .end(function(err, res){
+                .end(function (err, res) {
                     expect(err).to.eql(null);
                     expect(Array.isArray(res.body)).to.be.true;
                     var returnedBlog = res.body[0];
@@ -108,13 +101,13 @@ describe('blogs api end points', function () {
 
     });
 
-    describe('test delete request', function() {
+    describe('test delete request', function () {
         var id;
-        beforeEach(function(done){
+        beforeEach(function (done) {
             chai.request(serverUrl)
                 .post('/blogs')
                 .send(blogB)
-                .end(function(err, res) {
+                .end(function (err, res) {
                     id = res.body._id;
                     done();
                 });
