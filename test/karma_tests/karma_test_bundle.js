@@ -32239,8 +32239,10 @@ describe('blogs controller', function () {
     });
 
     describe('REST request from angular controller', function () {
-        beforeEach(angular.mock.inject(function (_$httpBackend_) {
+        beforeEach(angular.mock.inject(function ($rootScope, _$httpBackend_) {
             $httpBackend = _$httpBackend_;
+            $scope = $rootScope.$new();
+            $ControllerConstructor('blogsController', {$scope: $scope});
         }));
 
         afterEach(function () {
@@ -32252,11 +32254,44 @@ describe('blogs controller', function () {
             var blogA = randomBlog.getRandomBlog();
             $httpBackend.expectGET(requestUrl).respond(200, [blogA]);
 
-        var blogsConroller = $ControllerConstructor('blogsController', {$scope: $scope});
             $scope.getAll();
             $httpBackend.flush();
 
             expect($scope.blogs[0]).toEqual(blogA);
+        });
+
+        it('should be able to save the blog', function () {
+            var blogA = randomBlog.getRandomBlog();
+            $httpBackend.expectPOST(requestUrl).respond(200, blogA);
+
+            $scope.create(blogA);
+            $httpBackend.flush();
+
+            expect($scope.blogs[0]).toEqual(blogA);
+        });
+
+        it('should be able to save the blog changes', function () {
+            var updatedBlogA = randomBlog.getRandomBlog();
+            updatedBlogA._id = 1;
+            $httpBackend.expectPUT(requestUrl + '/' + 1).respond(200);
+
+            $scope.save(updatedBlogA);
+            $httpBackend.flush();
+
+            expect(updatedBlogA.editing).toBe(false);
+        });
+
+        it('should be able to delete the note', function () {
+            var blogA = randomBlog.getRandomBlog();
+            blogA._id = 1;
+            blogA.editing = true;
+            $httpBackend.expectDELETE(requestUrl + '/' + blogA._id).respond(200);
+
+            $scope.blogs.push(blogA);
+            $scope.remove(blogA);
+            $httpBackend.flush();
+
+            expect($scope.blogs.length).toBe(0);
         });
     });
 

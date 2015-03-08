@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>My Blog</title>
+</head>
+<body data-ng-app="blogsApp">
+    <main data-ng-controller="blogsController" data-ng-init="getAll()">
+        <h1>Blogs:</h1>
+
+        <form name="newBlogForm">
+            <label for="newBlogAuthor"></label>
+            <input type="text" id="newBlogAuthor" data-ng-model="newBlog.author"/><br/>
+
+            <label for="newBlogEmail"></label>
+            <input type="text" id="newBlogEmail" data-ng-model="newBlog.email"/><br/>
+
+            <label for="newBlogBody"></label>
+            <input type="textarea" id="newBlogBody" data-ng-model="newBlog.body"/><br/>
+
+            <button type="submit" data-ng-click="create(newBlog)">Save New Blog</button>
+        </form>
+
+        <ul data-ng-repeat="blog in blogs">
+            <li>
+                <div>
+                    Author: {{blog.author}}
+                    Email: {{blog.email}}
+                    Content: {{blog.body}}
+                </div>
+                <form data-ng-if="blog.editing">
+                    <label for="blog{{blog._id}}"></label>
+                    <input type="text" id="blog{{blog._id}}" data-ng-model="blog.author"/>
+                    <label for="blogEmail"></label>
+                    <input type="text" id="blogEmail" data-ng-model="blog.email"/>
+                    <label for="blogBody"></label>
+                    <input type="text" id="blogBody" data-ng-model="blog.body"/>
+                    <button type="submit" data-ng-click="save(blog)">Save</button>
+                    <button type="submit" data-ng-click="toggleEdit(blog)">Cancel</button>
+                </form>
+                <button data-ng-click="toggleEdit(blog)" data-ng-if="!blog.editing">Edit</button>
+                <button data-ng-click="remove(blog)">Delete</button>
+            </li>
+        </ul>
+    </main>
+    <script src="bundle.js"></script>
+</body>
+</html>
