@@ -8,7 +8,7 @@ var express = require('express'),
 
 module.exports = {
     startServer: function () {
-        mongoose.connect(process.env.MONG_URI || 'mongodb://localhost/myApp_dev');
+        mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/myApp_dev');
         userRouter(router);
 
         app.use('/api/v1', router);
