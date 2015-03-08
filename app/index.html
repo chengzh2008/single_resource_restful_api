@@ -3,46 +3,64 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>My Blog</title>
+    <link rel="stylesheet" href="blog.css"/>
+
 </head>
 <body data-ng-app="blogsApp">
-    <main data-ng-controller="blogsController" data-ng-init="getAll()">
-        <h1>Blogs:</h1>
+<main data-ng-controller="blogsController" data-ng-init="getAll()">
+    <h1>Blogs:</h1>
 
-        <form name="newBlogForm">
-            <label for="newBlogAuthor"></label>
-            <input type="text" id="newBlogAuthor" data-ng-model="newBlog.author"/><br/>
+    <form name="newBlogForm">
+        <div>
+            <label for="newBlogAuthor">Author: </label>
+            <input type="text" id="newBlogAuthor" data-ng-model="newBlog.author"/>
+        </div>
+        <div>
+            <label for="newBlogEmail">Email: </label>
+            <input type="text" id="newBlogEmail" data-ng-model="newBlog.email"/>
+        </div>
+        <div>
+            <label for="newBlogBody">Content: </label>
+            <textarea name="newBlogbody" id="newBlogBody" cols="50" rows="10" data-ng-model="newBlog.body"></textarea>
+        </div>
+        <button type="submit" data-ng-click="create(newBlog)">Add</button>
+    </form>
 
-            <label for="newBlogEmail"></label>
-            <input type="text" id="newBlogEmail" data-ng-model="newBlog.email"/><br/>
-
-            <label for="newBlogBody"></label>
-            <input type="textarea" id="newBlogBody" data-ng-model="newBlog.body"/><br/>
-
-            <button type="submit" data-ng-click="create(newBlog)">Save New Blog</button>
-        </form>
-
-        <ul data-ng-repeat="blog in blogs">
-            <li>
+    <ul data-ng-repeat="blog in blogs">
+        <li>
+            <div data-ng-if="!blog.editing">
                 <div>
-                    Author: {{blog.author}}
-                    Email: {{blog.email}}
-                    Content: {{blog.body}}
+                    <label for="blog{{blog._id}}">Author: </label> {{blog.author}}
                 </div>
-                <form data-ng-if="blog.editing">
-                    <label for="blog{{blog._id}}"></label>
+                <div>
+                    <label for="blogEmail">Email: </label> {{blog.email}}
+                </div>
+                <div>
+                    <label for="blogBody">Content: </label>{{blog.body}}
+                </div>
+                <br/><button data-ng-click="toggleEdit(blog)" class="editing">Edit</button>
+            </div>
+            <form data-ng-if="blog.editing">
+                <div>
+                    <label for="blog{{blog._id}}">Author: </label>
                     <input type="text" id="blog{{blog._id}}" data-ng-model="blog.author"/>
-                    <label for="blogEmail"></label>
+                </div>
+                <div>
+                    <label for="blogEmail">Email: </label>
                     <input type="text" id="blogEmail" data-ng-model="blog.email"/>
-                    <label for="blogBody"></label>
-                    <input type="text" id="blogBody" data-ng-model="blog.body"/>
-                    <button type="submit" data-ng-click="save(blog)">Save</button>
-                    <button type="submit" data-ng-click="toggleEdit(blog)">Cancel</button>
-                </form>
-                <button data-ng-click="toggleEdit(blog)" data-ng-if="!blog.editing">Edit</button>
-                <button data-ng-click="remove(blog)">Delete</button>
-            </li>
-        </ul>
-    </main>
-    <script src="bundle.js"></script>
+                </div>
+                <div>
+                    <label for="blogBody">Content: </label>
+                    <textarea name="blogBody" id="blogBody" cols="50" rows="10"
+                              data-ng-model="blog.body"></textarea>
+                </div>
+                <button type="submit" data-ng-click="save(blog)" class="save">Save</button>
+                <button type="button" data-ng-click="toggleEdit(blog)">Cancel</button>
+            </form>
+            <button data-ng-click="remove(blog)" class="remove">Delete</button>
+        </li>
+    </ul>
+</main>
+<script src="bundle.js"></script>
 </body>
 </html>
