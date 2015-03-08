@@ -6,12 +6,6 @@ var Blog = require('../models/blogs'),
 module.exports = function (router) {
     router.use(bodyparser.json());
 
-    // middleware to log the request, should be placed before those request.
-    router.use(function (req, res, next) {
-        console.log('A request ', req.method, req.url, " has been made");
-        next();
-    });
-
     router.post('/blogs', function (req, res) {
         var newblog = new Blog(req.body);
         newblog.save(function (err, blog) {

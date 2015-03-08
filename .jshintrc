@@ -6,6 +6,7 @@
         "before": true,
         "after": true,
         "module": true,
-        "beforeEach": true
+        "beforeEach": true,
+        "afterEach": true
     }
 }

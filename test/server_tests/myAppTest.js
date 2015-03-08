@@ -2,7 +2,7 @@
 /*jshint expr: true*/
 
 process.env.MONG_URI = 'mongodb://localhost/myApp_test';
-require('../index');
+require('../../index');
 
 var chai = require('chai'),
     chaihttp = require('chai-http'),
@@ -17,27 +17,25 @@ chai.use(chaihttp);
 
 function getRandomblogObject() {
     return {
-        id: chance.string(50),
         author: chance.string(10),
         email: chance.string(10) + '@' + chance.string(5) + '.com',
-        body: chance.string(200)
+        body: chance.string(200),
+        date: new Date().toJSON(),
     };
 }
 
 describe('blogs api end points', function () {
     var blogA = getRandomblogObject(),
         blogDefault = {
-            id: chance.string(50),
             author: chance.string(10),
             body: chance.string(200)
         },
 
         blogB = getRandomblogObject(),
-        blogC = getRandomblogObject(),
-        blogD = getRandomblogObject(),
-        blogE = getRandomblogObject();
+        blogC = getRandomblogObject();
 
-    after(function (done) {
+
+    afterEach(function (done) {
         mongoose.connection.db.dropDatabase(function () {
             done();
         });
@@ -49,7 +47,6 @@ describe('blogs api end points', function () {
             .send(blogA)
             .end(function (err, res) {
                 expect(err).to.eql(null);
-                expect(res.body.id).to.eql(blogA.id);
                 expect(res.body.author).to.eql(blogA.author);
                 expect(res.body.email).to.eql(blogA.email);
                 expect(res.body.body).to.eql(blogA.body);
@@ -63,7 +60,6 @@ describe('blogs api end points', function () {
             .send(blogDefault)
             .end(function(err, res){
                 expect(err).to.eql(null);
-                expect(res.body.id).to.eql(blogDefault.id);
                 expect(res.body.author).to.eql(blogDefault.author);
                 expect(res.body.email).to.eql('xyz@abc.com');
 
@@ -89,17 +85,20 @@ describe('blogs api end points', function () {
                 .end(function(err, res){
                     expect(err).to.eql(null);
                     expect(Array.isArray(res.body)).to.be.true;
-                    expect(res.body[0]).to.have.property('id');
+                    var returnedBlog = res.body[0];
+                    delete returnedBlog._id;
+                    delete returnedBlog.__v;
+                    expect(returnedBlog).to.deep.eql(blogB);
                     done();
                 });
         });
 
         it('should update the blog', function (done) {
+            blogC._id = id;
             chai.request(serverUrl)
                 .put('/blogs/' + id)
                 .send(blogC)
                 .end(function (err, res) {
-                    delete res.body._id;
                     expect(err).to.eql(null);
                     expect(res.body).to.deep.eql(blogC);
                     done();
