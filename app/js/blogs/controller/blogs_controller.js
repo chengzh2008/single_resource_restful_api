@@ -28,6 +28,7 @@ module.exports = function(app) {
                 data: blog
             }).success(function(data){
                 $scope.blogs.push(data);
+                $scope.newBlog = {};
             }).error(function (data) {
                 console.log(data);
             });
@@ -58,11 +59,15 @@ module.exports = function(app) {
 
         $scope.toggleEdit = function (blog) {
             if(blog.editing) {
-                blog = JSON.parse(JSON.stringify($scope.oldBlog));
+                blog.author = blog.oldAuthor;
+                blog.email = blog.oldEmail;
+                blog.body = blog.oldBody;
                 blog.editing = false;
             } else {
                 blog.editing = true;
-                $scope.oldBlog = JSON.parse(JSON.stringify(blog));
+                blog.oldAuthor = blog.author;
+                blog.oldEmail = blog.email;
+                blog.oldBody = blog.body;
             }
         };
 
