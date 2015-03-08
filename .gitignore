@@ -2,4 +2,3 @@ node_modules
 .idea
 db
 bower_components
-build
