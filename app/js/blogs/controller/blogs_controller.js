@@ -64,7 +64,6 @@ module.exports = function(app) {
                 blog.editing = true;
                 $scope.oldBlog = JSON.parse(JSON.stringify(blog));
             }
-            alert('button clicked');
         };
 
     }]);
