@@ -18,7 +18,8 @@ label {
 }
 
 div {
-    margin: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 button {
     cursor: pointer;
@@ -27,14 +28,19 @@ button {
     height: 20px;
 }
 
-button .remove {
+button.remove {
     background-color: red;
 }
 
-button .save {
+button.save {
     background-color: green;
 }
 
-button .editing {
+button.editing {
     background-color: yellow;
+}
+
+button#addingBlog {
+    background: cyan;
+    width: 100px;
 }

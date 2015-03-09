@@ -3,12 +3,13 @@
 module.exports = function(app) {
     app.controller('blogsController', ['$scope', '$http', function ($scope, $http) {
         var blogsUrl = '/api/v1/blogs';
-        $scope.addingBlog = false;
+        $scope.newBlog = {};
+        $scope.newBlog.addingBlog = false;
         $scope.blogs = [];
 
-        $scope.toogleAddBlog = function () {
-            $scope.addingBlog = !$scope.addingBlog;
-        }
+        $scope.toggleAddBlog = function () {
+            $scope.newBlog.addingBlog = !$scope.newBlog.addingBlog;
+        };
 
         $scope.getAll = function () {
             $http({
@@ -29,6 +30,7 @@ module.exports = function(app) {
             }).success(function(data){
                 $scope.blogs.push(data);
                 $scope.newBlog = {};
+                $scope.addingBlog = false;
             }).error(function (data) {
                 console.log(data);
             });

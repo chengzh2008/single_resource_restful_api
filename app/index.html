@@ -9,8 +9,8 @@
 <body data-ng-app="blogsApp">
 <main data-ng-controller="blogsController" data-ng-init="getAll()">
     <h1>Blogs:</h1>
-
-    <form name="newBlogForm">
+    <button data-ng-if="!newBlog.addingBlog" data-ng-click="toggleAddBlog()" id="addingBlog">Add new blog</button>
+    <form name="newBlogForm" data-ng-if="newBlog.addingBlog">
         <div>
             <label for="newBlogAuthor">Author: </label>
             <input type="text" id="newBlogAuthor" data-ng-model="newBlog.author"/>
@@ -57,7 +57,7 @@
                               data-ng-model="blog.body"></textarea>
                 </div>
                 <button type="submit" data-ng-click="save(blog)" class="save">Save</button>
-                <button type="button" data-ng-click="toggleEdit(blog)">Cancel</button>
+                <button type="button" data-ng-click="toggleEdit(blog)" class="editing">Cancel</button>
             </form>
             <br/>
             <button data-ng-click="toggleEdit(blog)" class="editing" data-ng-if="!blog.editing">Edit</button>
