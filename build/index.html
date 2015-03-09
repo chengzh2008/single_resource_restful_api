@@ -23,7 +23,7 @@
             <label for="newBlogBody">Content: </label>
             <textarea name="newBlogbody" id="newBlogBody" cols="50" rows="10" data-ng-model="newBlog.body"></textarea>
         </div>
-        <button type="submit" data-ng-click="create(newBlog)">Add</button>
+        <button type="submit" data-ng-click="create(newBlog)" class="save">Add</button>
     </form>
 
     <ul data-ng-repeat="blog in blogs">
@@ -38,7 +38,9 @@
                 <div>
                     <label for="blogBody">Content: </label>{{blog.body}}
                 </div>
-                <br/><button data-ng-click="toggleEdit(blog)" class="editing">Edit</button>
+                <div>
+                    <label for="blogDate">Date: </label>{{blog.date}}
+                </div>
             </div>
             <form data-ng-if="blog.editing">
                 <div>
@@ -57,6 +59,8 @@
                 <button type="submit" data-ng-click="save(blog)" class="save">Save</button>
                 <button type="button" data-ng-click="toggleEdit(blog)">Cancel</button>
             </form>
+            <br/>
+            <button data-ng-click="toggleEdit(blog)" class="editing" data-ng-if="!blog.editing">Edit</button>
             <button data-ng-click="remove(blog)" class="remove">Delete</button>
         </li>
     </ul>

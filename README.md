@@ -1,11 +1,22 @@
-# Single Resource RESTful API
+# My Blogs: Angular web application with single Resource RESTful API web server
 
-## Technologies used in this RESTful API:
-	NodeJs, Express, MongoDB, Mongoose, Grunt, Chai, Chai-http, and some third-party libraries
+At moment, user can add whatever blogs as they want, no restriction temporally. Later authentication will be added.
 
-This is the RESTFUL API server backed by MongoDB.
+
+## Technologies used in this Web application:
+	Angular, NodeJs, Express, MongoDB, Mongoose, Grunt, Chai, Chai-http, and some third-party libraries
+
+Front-end: AngularJs
+Back-end: NodeJs/ExpressJs
+Front-end testing: Angular-mocks, Karma, Jasmin
+Back-end testing: Mocha, Chai(http)
+Other tools used: Grunt, Browserify, Bower, npm, debowerify, jshint
+IDE: WebStorm
+Cloud hosting: Heroku
+Database: NoSQL MongoDB
 
 ## Usage
+Web address: 
 
 **Installation**:
 `npm install single_resource_restful_api`
