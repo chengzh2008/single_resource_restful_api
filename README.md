@@ -16,6 +16,11 @@ At moment, user can add whatever blogs as they want, no restriction temporally. 
 	Database: NoSQL MongoDB
 
 ## Usage
+
+	grunt build 	// to generate build files for serving the web application
+	grunt test:client 	// run the test code for angular front-end
+	grunt test:server	// run the test code for restful api back-end, remember to run 'mongod' before running the test code
+
 Web application address:
 
 	myangulablog.herokuapp.com
