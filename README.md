@@ -6,17 +6,19 @@ At moment, user can add whatever blogs as they want, no restriction temporally. 
 ## Technologies used in this Web application:
 	Angular, NodeJs, Express, MongoDB, Mongoose, Grunt, Chai, Chai-http, and some third-party libraries
 
-Front-end: AngularJs
-Back-end: NodeJs/ExpressJs
-Front-end testing: Angular-mocks, Karma, Jasmin
-Back-end testing: Mocha, Chai(http)
-Other tools used: Grunt, Browserify, Bower, npm, debowerify, jshint
-IDE: WebStorm
-Cloud hosting: Heroku
-Database: NoSQL MongoDB
+	Front-end: AngularJs
+	Back-end: NodeJs/ExpressJs
+	Front-end testing: Angular-mocks, Karma, Jasmin
+	Back-end testing: Mocha, Chai(http)
+	Other tools used: Grunt, Browserify, Bower, npm, debowerify, jshint
+	IDE: WebStorm
+	Cloud hosting: Heroku
+	Database: NoSQL MongoDB
 
 ## Usage
-Web application address: myangulablog.herokuapp.com
+Web application address:
+
+	myangulablog.herokuapp.com
 
 **Installation**:
 `npm install single_resource_restful_api`
@@ -62,13 +64,20 @@ For delete request, no data is sent along the request, the response data is a js
 
 ## Internal components (for reference only)
 
-There are four modules in my express framework: 
+Back-end:
+There are four modules in my express framework:
 	
 	index.js			// The package main js file
 	server.js 			// Server related configuration and creation
 	blogs.js			// Model definition and configuration of MongoDB with mongoose
 	blogs_routes.js		// Routes handling method (RESTFul API web service, supporting GET|POST|PUT|DELETE request)
 
+Front-end:
+
+	Front-end code is located in app directory. app/js directory holds all JavaScript codes.
+	"build/" directory holds the code delivery the code to user
+	"db/" directory holds the mongoDB data. In Heroku cloud, mongolab serve as the database.
+	"test/" directory holds the testing code, including front-end and back-end.
 
 ## Credits
 Give credits to instructors and members in CodeFellow Fullstack Javascript for those helpful discussion and suggestion.
