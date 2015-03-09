@@ -16,7 +16,7 @@ Cloud hosting: Heroku
 Database: NoSQL MongoDB
 
 ## Usage
-Web address: 
+Web application address: myangulablog.herokuapp.com
 
 **Installation**:
 `npm install single_resource_restful_api`
