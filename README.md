@@ -2,6 +2,8 @@
 
 At moment, user can add whatever blogs as they want, no restriction temporally. Later authentication will be added.
 
+The web application has been deployed to Heroku. 
+
 
 ## Technologies used in this Web application:
 	Angular, NodeJs, Express, MongoDB, Mongoose, Grunt, Chai, Chai-http, and some third-party libraries
