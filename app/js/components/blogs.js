@@ -2,7 +2,7 @@
 
 var React = require('react');
 
-module.exports = React.createClass({
+var Blog = React.createClass({
     render: function () {
         var blog = this.props.blog;
         return (
@@ -21,6 +21,21 @@ module.exports = React.createClass({
                 </div>
             </div>
 
+        );
+    }
+});
+
+module.exports = React.createClass({
+    render: function () {
+        var blogNodes = this.props.data.map(function (blog) {
+            return (
+                <Blog blog={blog} key={blog._id}></Blog>
+            )
+        });
+        return (
+            <div className="blogList">
+                {blogNodes}
+            </div>
         );
     }
 });
