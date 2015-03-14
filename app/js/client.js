@@ -1,6 +1,8 @@
 'use strict';
+
 var React = require('react');
 var ajax = require('jquery').ajax;
+var Blog = require('./components/blog');
 
 var BlogBox = React.createClass({
     loadBlogsFromServer: function () {
@@ -77,9 +79,18 @@ var BlogForm = React.createClass({
     render: function () {
         return (
             <form className="blogForm" onSubmit={this.handleSubmit}>
-                <input type="text" placeholder="Your name" ref="author" />
-                <input type="text" placeholder="You email" ref="email"/>
-                <input type="text" placeholder="Your blog" ref="body"/>
+                <div>
+                    <label htmlFor="blog{{blog._id}}">Author: </label>
+                    <input type="text" placeholder="Your name" ref="author" />
+                </div>
+                <div>
+                    <label htmlFor="blogEmail">Email: </label>
+                    <input type="text" placeholder="You email" ref="email"/>
+                </div>
+                <div>
+                    <label htmlFor="blogBody">Content: </label>
+                    <textarea type="text" placeholder="Your blog" ref="body"></textarea>
+                </div>
                 <input type="submit" value="Post" />
             </form>
         );
@@ -102,28 +113,7 @@ var BlogList = React.createClass({
     }
 });
 
-var Blog = React.createClass({
-    render: function () {
-    var blog = this.props.blog;
-        return (
-            <div className='blog'>
-                <div>
-                    <label htmlFor="blog{{blog._id}}">Author: </label> {blog.author}
-                </div>
-                <div>
-                    <label htmlFor="blogEmail">Email: </label> {blog.email}
-                </div>
-                <div>
-                    <label htmlFor="blogBody">Content: </label>{blog.body}
-                </div>
-                <div>
-                    <label htmlFor="blogDate">Date: </label>{blog.date}
-                </div>
-            </div>
 
-        );
-    }
-});
 
 React.render(
     <BlogBox url='/api/v1/blogs' pollInterval={2000} />,
