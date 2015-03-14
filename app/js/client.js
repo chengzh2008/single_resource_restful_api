@@ -19,9 +19,9 @@ var BlogBox = React.createClass({
         console.log('before ajax call...', blog);
         ajax({
             url: this.props.url,
-            dataType: 'json',
-            type: 'POST',
-            data: blog,
+            contentType: 'application/json',
+            method: 'POST',
+            data: JSON.stringify(blog),
             success: function (data) {
                 console.log('after saving to database...', data);
                 var blogs = this.state.data;
@@ -29,7 +29,7 @@ var BlogBox = React.createClass({
                 this.setState({data: newBlogs});
             }.bind(this),
             error: function (xhr, status, err) {
-                console.error(this.props.url, status, err.toString());
+                console.log(err);
             }.bind(this)
         });
     },
