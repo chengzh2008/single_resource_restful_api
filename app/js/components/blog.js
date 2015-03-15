@@ -5,7 +5,7 @@ var React = require('react');
 module.exports = React.createClass({
     handleRemove: function () {
         alert('about to delete...');
-        //this.props.onBlogRemove(this.props.blog);
+        this.props.onBlogRemove(this.props.blog);
     },
 
     render: function () {
@@ -24,7 +24,7 @@ module.exports = React.createClass({
                 <div>
                     <label htmlFor="blogDate">Date: </label>{blog.date}
                 </div>
-                <button type='submit' onClick={this.handleRemove}>Delete</button>
+                <button type='submit' onClick={this.handleRemove} className="remove">Delete</button>
             </li>
 
         );

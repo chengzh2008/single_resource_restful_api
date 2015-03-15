@@ -37,7 +37,7 @@ module.exports = React.createClass({
                     <label htmlFor="blogBody">Content: </label>
                     <textarea type="text" placeholder="Your blog" ref="body"></textarea>
                 </div>
-                <input type="submit" value="Post" />
+                <button type="submit" value="Post" className="addingBlog">Post</button>
             </form>
         );
     }

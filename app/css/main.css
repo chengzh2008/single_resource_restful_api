@@ -40,7 +40,6 @@ button.editing {
     background-color: yellow;
 }
 
-button#addingBlog {
+button.addingBlog {
     background: cyan;
-    width: 100px;
 }
