@@ -19,7 +19,6 @@ module.exports = React.createClass({
         });
     },
     handleBlogSubmit: function (blog) {
-        console.log('before ajax call...', blog);
         ajax({
             url: this.props.url,
             contentType: 'application/json',
@@ -37,7 +36,6 @@ module.exports = React.createClass({
         });
     },
     handleBlogRemove: function (blog) {
-      alert('inside the blog box...');
         ajax({
             url: this.props.url + '/' + blog._id,
             contentType: 'application/json',

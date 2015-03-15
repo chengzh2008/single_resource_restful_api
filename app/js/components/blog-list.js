@@ -5,7 +5,6 @@ var Blog = require('./blog');
 
 module.exports = React.createClass({
     handleBlogRemove: function (blog) {
-        alert('about to delete the blog...');
         this.props.onBlogRemove(blog);
     },
 

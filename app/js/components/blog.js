@@ -4,7 +4,6 @@ var React = require('react');
 
 module.exports = React.createClass({
     handleRemove: function () {
-        alert('about to delete...');
         this.props.onBlogRemove(this.props.blog);
     },
 
