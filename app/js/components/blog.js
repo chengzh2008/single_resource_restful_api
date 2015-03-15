@@ -2,11 +2,16 @@
 
 var React = require('react');
 
-var Blog = React.createClass({
+module.exports = React.createClass({
+    handleRemove: function () {
+        alert('about to delete...');
+        //this.props.onBlogRemove(this.props.blog);
+    },
+
     render: function () {
         var blog = this.props.blog;
         return (
-            <div className='blog'>
+            <li className='blog'>
                 <div>
                     <label htmlFor="blog{{blog._id}}">Author: </label> {blog.author}
                 </div>
@@ -19,23 +24,9 @@ var Blog = React.createClass({
                 <div>
                     <label htmlFor="blogDate">Date: </label>{blog.date}
                 </div>
-            </div>
+                <button type='submit' onClick={this.handleRemove}>Delete</button>
+            </li>
 
-        );
-    }
-});
-
-module.exports = React.createClass({
-    render: function () {
-        var blogNodes = this.props.data.map(function (blog) {
-            return (
-                <Blog blog={blog} key={blog._id}></Blog>
-            )
-        });
-        return (
-            <div className="blogList">
-                {blogNodes}
-            </div>
         );
     }
 });

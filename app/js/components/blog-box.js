@@ -3,7 +3,7 @@
 var React = require('react');
 var ajax = require('jquery').ajax;
 var BlogForm = require('./blog-form');
-var Blogs = require('./blogs');
+var BlogList = require('./blog-list');
 
 module.exports = React.createClass({
     loadBlogsFromServer: function () {
@@ -49,7 +49,7 @@ module.exports = React.createClass({
             <div className="blogBox">
                 <h1>My Blogs</h1>
                 <BlogForm onBlogSubmit={this.handleBlogSubmit} />
-                <Blogs data={this.state.data}/>
+                <BlogList data={this.state.data}/>
             </div>
         );
     }
