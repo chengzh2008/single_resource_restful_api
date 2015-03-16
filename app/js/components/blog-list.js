@@ -7,11 +7,14 @@ module.exports = React.createClass({
     handleBlogRemove: function (blog) {
         this.props.onBlogRemove(blog);
     },
+    handleBlogSave: function (blog, newBlog) {
+        this.props.onBlogSave(blog, newBlog);
+    },
 
     render: function () {
         var blogNodes = this.props.data.map(function (blog) {
             return (
-                <Blog blog={blog} key={blog._id} onBlogRemove={this.handleBlogRemove}></Blog>
+                <Blog blog={blog} key={blog._id} onBlogRemove={this.handleBlogRemove} onBlogSave={this.handleBlogSave}></Blog>
             )
         }.bind(this));
         return (

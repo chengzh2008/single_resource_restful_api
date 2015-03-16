@@ -52,6 +52,23 @@ module.exports = React.createClass({
             }.bind(this)
         });
     },
+
+    handleBlogSave: function (blog, newBlog) {
+        ajax({
+            url: this.props.url  + '/' + newBlog._id,
+            contentType: 'application/json',
+            method: 'PUT',
+            data: JSON.stringify(newBlog),
+            success: function (data) {
+                var blogs = this.state.data;
+                blogs[blogs.indexOf(blog)] = data;
+                this.setState({data: blogs});
+            }.bind(this),
+            error: function (xhr, status, err) {
+                console.log(err);
+            }.bind(this)
+        });
+    },
     getInitialState: function () {
         return {data: []};
     },
@@ -65,7 +82,7 @@ module.exports = React.createClass({
             <div className="blogBox">
                 <h1>My Blogs</h1>
                 <BlogForm onBlogSubmit={this.handleBlogSubmit} />
-                <BlogList data={this.state.data} onBlogRemove={this.handleBlogRemove}/>
+                <BlogList data={this.state.data} onBlogRemove={this.handleBlogRemove} onBlogSave={this.handleBlogSave}/>
             </div>
         );
     }
