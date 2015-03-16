@@ -12,11 +12,8 @@ module.exports = React.createClass({
         this.props.onBlogRemove(this.props.blog);
     },
 
-    handleEdit: function () {
-        this.setState({showEditing: true});
-    },
-    handelCancel: function () {
-      this.setState({showEditing: false});
+    toggleEditForm: function () {
+        this.setState({showEditing: !this.state.showEditing});
     },
 
     handleSave: function (newBlog) {
@@ -29,21 +26,25 @@ module.exports = React.createClass({
         var blog = this.props.blog;
         return (
             <li className='blog'>
+            {!this.state.showEditing ?
                 <div>
-                    <label htmlFor="blog{{blog._id}}">Author: </label> {blog.author}
+                    <div>
+                        <label htmlFor="blog{{blog._id}}">Author: </label> {blog.author}
+                    </div>
+                    <div>
+                        <label htmlFor="blogEmail">Email: </label> {blog.email}
+                    </div>
+                    <div>
+                        <label htmlFor="blogBody">Content: </label>{blog.body}
+                    </div>
+                    <div>
+                        <label htmlFor="blogDate">Date: </label>{blog.date}
+                    </div>
                 </div>
-                <div>
-                    <label htmlFor="blogEmail">Email: </label> {blog.email}
-                </div>
-                <div>
-                    <label htmlFor="blogBody">Content: </label>{blog.body}
-                </div>
-                <div>
-                    <label htmlFor="blogDate">Date: </label>{blog.date}
-                </div>
-                { this.state.showEditing ? <BlogEditForm blog={blog} onCancel={this.handelCancel} onSave={this.handleSave}/> : null }
+                : null}
+                { this.state.showEditing ? <BlogEditForm blog={blog} onCancel={this.toggleEditForm} onSave={this.handleSave}/> : null }
 
-                <button type='submit' onClick={this.handleEdit} className="editing">Edit</button>
+                <button type='submit' onClick={this.toggleEditForm} className="editing">Edit</button>
                 <button type='submit' onClick={this.handleRemove} className="remove">Delete</button>
             </li>
 

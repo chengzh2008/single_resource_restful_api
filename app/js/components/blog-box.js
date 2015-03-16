@@ -70,7 +70,11 @@ module.exports = React.createClass({
         });
     },
     getInitialState: function () {
-        return {data: []};
+        return {data: [], showAddBlogForm: false};
+    },
+
+    toggleBlogForm: function () {
+        this.setState({showAddBlogForm: !this.state.showAddBlogForm})
     },
 
     componentDidMount: function () {
@@ -80,8 +84,9 @@ module.exports = React.createClass({
     render: function () {
         return (
             <div className="blogBox">
-                <h1>My Blogs</h1>
-                <BlogForm onBlogSubmit={this.handleBlogSubmit} />
+                <h1>My Blogs - ReactJs Front-End</h1>
+                <button type='submit' className="addingBlog" onClick={this.toggleBlogForm}>New</button>
+                {this.state.showAddBlogForm ? <BlogForm onBlogSubmit={this.handleBlogSubmit} /> : null}
                 <BlogList data={this.state.data} onBlogRemove={this.handleBlogRemove} onBlogSave={this.handleBlogSave}/>
             </div>
         );

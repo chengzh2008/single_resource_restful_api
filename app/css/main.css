@@ -36,9 +36,11 @@ button.save {
     background-color: green;
 }
 
-button.editing {
+
+button.editing, button.cancel {
     background-color: yellow;
 }
+
 
 button.addingBlog {
     background: cyan;
