@@ -1,74 +1,61 @@
 'use strict';
 
 var React = require('react');
-var ajax = require('jquery').ajax;
 var BlogForm = require('./blog-form');
 var BlogList = require('./blog-list');
+var BlogAPIService = require('../apiservice/blog-service');
 
 module.exports = React.createClass({
     loadBlogsFromServer: function () {
-        ajax({
-            url: this.props.url,
-            dataType: 'json',
-            success: function (data) {
+        BlogAPIService.get(
+            function (data) {
                 this.setState({data: data}); // here data is the field of the state object
             }.bind(this),
-            error: function (xhr, status, err) {
+            function (xhr, status, err) {
                 console.error(this.props.url, status, err.toString());
-            }.bind(this)
-        });
+            }.bind(this));
+
     },
     handleBlogSubmit: function (blog) {
-        ajax({
-            url: this.props.url,
-            contentType: 'application/json',
-            method: 'POST',
-            data: JSON.stringify(blog),
-            success: function (data) {
-                console.log('after saving to database...', data);
+        BlogAPIService.post(blog,
+            function (data) {
                 var blogs = this.state.data;
                 var newBlogs = blogs.concat([data]);
-                this.setState({data: newBlogs});
+                this.setState({
+                    data: newBlogs,
+                    showAddBlogForm: !this.state.showAddBlogForm
+                });
             }.bind(this),
-            error: function (xhr, status, err) {
+            function (xhr, status, err) {
                 console.log(err);
-            }.bind(this)
-        });
+            }.bind(this));
+
     },
+
     handleBlogRemove: function (blog) {
-        ajax({
-            url: this.props.url + '/' + blog._id,
-            contentType: 'application/json',
-            method: 'DELETE',
-            data: JSON.stringify(blog),
-            success: function (data) {
-                console.log('after saving to database...', data);
+        BlogAPIService.delete(blog,
+            function (data) {
                 var blogs = this.state.data;
                 var newBlogs = blogs.splice(blogs.indexOf(blog), 1);
                 this.setState({data: newBlogs});
             }.bind(this),
-            error: function (xhr, status, err) {
+            function (xhr, status, err) {
                 console.log(err);
-            }.bind(this)
-        });
+            }.bind(this));
     },
 
     handleBlogSave: function (blog, newBlog) {
-        ajax({
-            url: this.props.url  + '/' + newBlog._id,
-            contentType: 'application/json',
-            method: 'PUT',
-            data: JSON.stringify(newBlog),
-            success: function (data) {
+        BlogAPIService.put(blog, newBlog,
+            function (data) {
                 var blogs = this.state.data;
                 blogs[blogs.indexOf(blog)] = data;
                 this.setState({data: blogs});
             }.bind(this),
-            error: function (xhr, status, err) {
+            function (xhr, status, err) {
                 console.log(err);
-            }.bind(this)
-        });
+            }.bind(this));
     },
+
     getInitialState: function () {
         return {data: [], showAddBlogForm: false};
     },
@@ -81,6 +68,7 @@ module.exports = React.createClass({
         this.loadBlogsFromServer();
         setInterval(this.loadBlogsFromServer, this.props.pollInterval)
     },
+
     render: function () {
         return (
             <div className="blogBox">
