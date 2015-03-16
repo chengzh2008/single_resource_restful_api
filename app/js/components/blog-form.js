@@ -13,7 +13,6 @@ module.exports = React.createClass({
         if (!newBlog.author || !newBlog.email || !newBlog.body) {
             return;
         }
-        console.log(newBlog);
         this.props.onBlogSubmit(newBlog);
         React.findDOMNode(this.refs.author).value = '';
         React.findDOMNode(this.refs.email).value = '';
