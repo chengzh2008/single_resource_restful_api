@@ -10,6 +10,7 @@ module.exports = {
     startServer: function () {
         mongoose.connect(process.env.MONG_URI || 'mongodb://localhost/myApp_dev');
         userRouter(router);
+        app.use(express.static(__dirname + '/build'));
 
         app.use('/api/v1', router);
 

@@ -1,0 +1,47 @@
+
+main {
+    background-color: white;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+ul {
+    margin: 10px 0;
+    padding: 0;
+    list-style: none;
+}
+
+label {
+    float: left;
+    width: 60px;
+}
+
+div {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+button {
+    cursor: pointer;
+    margin: 2px;
+    width: 60px;
+    height: 20px;
+}
+
+button.remove {
+    background-color: red;
+}
+
+button.save {
+    background-color: green;
+}
+
+
+button.editing, button.cancel {
+    background-color: yellow;
+}
+
+
+button.addingBlog {
+    background: cyan;
+}
